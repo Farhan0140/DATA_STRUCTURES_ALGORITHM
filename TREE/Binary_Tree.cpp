@@ -38,7 +38,23 @@ class Node{
 
 //_______________________________________________________________________________________________
 
+class Node_1{
+    public:                     
+        int data;              
+        Node_1 *left;
+        Node_1 *right;
+    
+    Node_1(int value){
+        this->data = value;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+//_______________________________________________________________________________________________
+
 Node *create_tree();
+Node_1 *create_tree_1();
 
 //_______________________________________________________________________________________________
 
@@ -49,8 +65,11 @@ Node *create_tree();
 //____________________Tree_Traversal_____________________________________________________________
 
 /* Pre_Order */ void pre_order(Node *root);
+                void pre_order_1(Node_1 *root1);
 /* Post_Order */ void post_order(Node *root);
+                 void post_order_1(Node *root);
 /* In_Order */ void in_order(Node *root);
+               void in_order_1(Node *root);
 
 //_______________________________________________________________________________________________
 
@@ -59,11 +78,17 @@ int main(){
     fast_read();
 
     Node *root = create_tree();
+    Node_1 *root1 = create_tree_1();
 
     pre_order(root);
+    // pre_order_1(root);
     // post_order(root);
+    // post_order_1(root);
     // in_order(root);
+    // in_order_1(root);
     
+    cout << endl;
+    pre_order_1(root1);
     cout << endl;
     return 0;
 }
@@ -105,31 +130,52 @@ Node *create_tree(){
     Node *nine = create_Node(9);     // Right Child
 
     add_left_child(two, seven);      //-|
-    add_right_child(two, nine);      //-|
-                                     //-|
-    Node *one = create_Node(1);      //-|
-    Node *six = create_Node(6);      //-|
-                                     //-|
-    add_left_child(seven, one);      //- >   Left Sub Tree of Root Node 2
-    add_right_child(seven, six);     //-|
-                                     //-|
-    Node *five = create_Node(5);     //-|
-    Node *ten = create_Node(10);     //-|
-                                     //-|
-    add_left_child(six, five);       //-|
+    add_right_child(two, nine);      // |
+                                     // |
+    Node *one = create_Node(1);      // |
+    Node *six = create_Node(6);      // |
+                                     // |
+    add_left_child(seven, one);      //  >   Left Sub Tree of Root Node 2
+    add_right_child(seven, six);     // |
+                                     // |
+    Node *five = create_Node(5);     // |
+    Node *ten = create_Node(10);     // |
+                                     // |
+    add_left_child(six, five);       // |
     add_right_child(six, ten);       //-|
 
     
     Node *eight = create_Node(8);    //-|
-    add_right_child(nine, eight);    //-|
-                                     //-|
-    Node *three = create_Node(3);    //- >   Right Sub Tree of Root Node 2
-    Node *four = create_Node(4);     //-|
-                                     //-|
-    add_left_child(eight, three);    //-|   
+    add_right_child(nine, eight);    // |
+                                     // |
+    Node *three = create_Node(3);    //  >   Right Sub Tree of Root Node 2
+    Node *four = create_Node(4);     // |
+                                     // |
+    add_left_child(eight, three);    // |   
     add_right_child(eight, four);    //-|
 
     return two;
+}
+
+//_______________________________________________________________________________________________
+
+Node_1 *create_tree_1(){
+    Node_1 *root = new Node_1(2);
+    root->left = new Node_1(7);
+    root->right = new Node_1(9);
+
+    root->left->left = new Node_1(1);
+    root->left->right = new Node_1(6);
+
+    root->left->right->left = new Node_1(5);
+    root->left->right->right = new Node_1(10);
+
+    root->right->right = new Node_1(8);
+
+    root->right->right->left = new Node_1(3);
+    root->right->right->right = new Node_1(4);
+
+    return root;
 }
 
 //____________________________Pre_Order__________________________________________________________
@@ -144,6 +190,18 @@ void pre_order(Node *root){
     if(root->right != NULL){
         pre_order(root->right);
     }
+}
+
+void pre_order_1(Node_1 *root1){
+
+    if(root1 == NULL){
+        return;
+    }
+
+    cout << root1->data << " ";
+
+    pre_order_1(root1->left);
+    pre_order_1(root1->right);
 }
 
 //____________________________Post_Order_________________________________________________________
@@ -161,6 +219,19 @@ void post_order(Node *root){
     cout << root->data << " ";
 }
 
+// void post_order_1(Node *root){
+
+//     if(root == NULL){
+//         return;
+//     }
+
+//     pre_order_1(root->left);
+
+//     pre_order_1(root->right);
+
+//     cout << root->data << " ";
+// }
+
 //____________________________In_Order___________________________________________________________
 
 void in_order(Node *root){
@@ -174,6 +245,19 @@ void in_order(Node *root){
     if(root->right != NULL){
         pre_order(root->right);
     }
+}
+
+void in_order_1(Node *root){
+
+    if(root == NULL){
+        return;
+    }
+
+    pre_order(root->left);
+    
+    cout << root->data << " ";
+
+    pre_order(root->right);
 }
 
 //_______________________________________________________________________________________________
