@@ -209,41 +209,41 @@ void pre_order_1(Node_1 *root1){
 void post_order(Node *root){
 
     if(root->left != NULL){
-        pre_order(root->left);
+        post_order(root->left);
     }
 
     if(root->right != NULL){
-        pre_order(root->right);
+        post_order(root->right);
     }
 
     cout << root->data << " ";
 }
 
-// void post_order_1(Node *root){
+void post_order_1(Node *root){
 
-//     if(root == NULL){
-//         return;
-//     }
+    if(root == NULL){
+        return;
+    }
 
-//     pre_order_1(root->left);
+    post_order_1(root->left);
 
-//     pre_order_1(root->right);
+    post_order_1(root->right);
 
-//     cout << root->data << " ";
-// }
+    cout << root->data << " ";
+}
 
 //____________________________In_Order___________________________________________________________
 
 void in_order(Node *root){
 
     if(root->left != NULL){
-        pre_order(root->left);
+        in_order(root->left);
     }
     
     cout << root->data << " ";
 
     if(root->right != NULL){
-        pre_order(root->right);
+        in_order(root->right);
     }
 }
 
@@ -253,11 +253,11 @@ void in_order_1(Node *root){
         return;
     }
 
-    pre_order(root->left);
+    in_order_1(root->left);
     
     cout << root->data << " ";
 
-    pre_order(root->right);
+    in_order_1(root->right);
 }
 
 //_______________________________________________________________________________________________
