@@ -28,12 +28,14 @@ class Node{
 /* 3 */ void Insert_at_tail(Node * &head, Node *&tail, int val);
 /* 4 */ void Delete_Head(Node * &head);
 /* 5 */ void Delete_any_position(Node *head, int pos);
-/* 6 */ void Delete_tail(Node *head);
+/* 6 */ void Delete_tail(Node *&head);
 /* 7 */ void Take_a_Linked_List_as_Input(Node *&head, Node *&tail);
 /* 8 */ void Size_of_a_Linked_List(Node *head);
 /* 9 */ void Sort_A(Node *head);
 /* 10 */ void Sort_D(Node *head);
-/* 11 */ void Demo_linked_list(Node * &head, Node *&tail, int size);
+/* 11 */ void reverse_R(Node *&head, Node *tmp);  // Using Recursion
+/* 11 */ void reverse_L(Node *&head);  // Using Loop
+/* 12 */ void Demo_linked_list(Node * &head, Node *&tail, int size);
 /* 0 */ void Print(Node *head);
 
 //!_______________________________________________________________________________________________
@@ -55,7 +57,8 @@ int main(){
         cout << "8. Size of a Linked List" << endl;
         cout << "9. Sort in Ascending Order" << endl;
         cout << "10. Sort in Descending Order" << endl;
-        cout << "11. Demo Linked List" << endl;
+        cout << "11. Reverse" << endl;
+        cout << "12. Demo Linked List" << endl;
         cout << "0. Print Linked List\n\n--> ";
 
         int choose; cin >> choose;
@@ -147,6 +150,21 @@ int main(){
             break;
 
             case 11:
+                system("cls");
+                cout << "1. Using Recursion" << endl;
+                cout << "2. Using Loop" << endl;
+                cout << "--> ";
+                int new_choose; cin >> new_choose;
+
+                if(new_choose == 1){ reverse_R(head, head); }
+                else if(new_choose == 2){ reverse_L(head); }
+                else{
+                    cout << "Wrong Choose\n" << endl;
+                }
+                Print(head);
+            break;
+
+            case 12:
                 system("cls");
                 int sz;
                 cout << "Enter Demo Linked list Size -> "; cin >> sz;
@@ -291,11 +309,16 @@ int main(){
 
 //_______________________________________________________________________________________________
 
-/* 6 */ void Delete_tail(Node *head){
+/* 6 */ void Delete_tail(Node *&head){
     //* Time_Complexity --> O(N)
 
     Node *DeleteNode;
     Node *temp = head;
+
+    if(temp->next == NULL){
+        head = NULL;
+        return;
+    }
 
     while(temp->next->next != NULL){
         temp = temp->next;
@@ -375,7 +398,36 @@ int main(){
 
 //_______________________________________________________________________________________________
 
-/* 11 */void Demo_linked_list(Node *&head, Node *&tail, int size){
+/* 11 */ void reverse_R(Node *&head, Node *tmp) {
+    if(tmp->next == NULL){
+        head = tmp;
+        return;
+    }
+    reverse_R(head, tmp->next);
+
+    tmp->next->next = tmp;
+    tmp->next = NULL;
+}
+
+
+/* 11 */ void reverse_L(Node *&head) {
+    Node *current = head;
+    Node *nxt = NULL;
+    Node *previous = NULL;
+
+    while(current != NULL){
+        nxt = current->next;
+        current->next = previous;
+        previous = current;
+        current = nxt;
+    }
+
+    head = previous;
+}
+
+//_______________________________________________________________________________________________
+
+/* 1c2 */void Demo_linked_list(Node *&head, Node *&tail, int size){
     //* Time_Complexity --> O(N)
 
     Node *temp = head;

@@ -28,9 +28,9 @@ class Node{
 /* 1 */ void Insert_at_head(Node * &head, Node *&tail, int val); //done
 /* 2 */ void Insert_at_anyPosition(Node *head, int pos, int val); // DONE
 /* 3 */ void Insert_at_tail(Node * &head, Node *&tail, int val); // done
-/* 4 */ void Delete_Head(Node * &head); //done
+/* 4 */ void Delete_Head(Node * &head, Node *&tail); //done
 /* 5 */ void Delete_any_position(Node *head, int pos);
-/* 6 */ void Delete_tail(Node *&tail);
+/* 6 */ void Delete_tail(Node *&head, Node *&tail);
 /* 7 */ void Take_a_Linked_List_as_Input(Node *&head, Node *&tail);
 /* 8 */ int Size_of_a_Linked_List(Node *head); // done
 /* 9 */ void Sort_A(Node *head);
@@ -106,7 +106,7 @@ int main(){
 
             case 4:
                 system("cls");
-                Delete_Head(head);
+                Delete_Head(head, tail);
                 Print_head_to_tail(head);
             break;
 
@@ -116,7 +116,7 @@ int main(){
                 cout << "Enter Position [index start with 0]-> "; cin >> pos;
                 system("cls");
                 if(pos == 0){
-                    Delete_Head(head);
+                    Delete_Head(head, tail);
                 }else{
                     Delete_any_position(head, pos);
                 }
@@ -125,7 +125,7 @@ int main(){
 
             case 6:
                 system("cls");
-                Delete_tail(tail);
+                Delete_tail(head, tail);
                 Print_head_to_tail(head);
             break;
 
@@ -262,7 +262,7 @@ int main(){
 
 //_______________________________________________________________________________________________
 
-/* 4 */ void Delete_Head(Node * &head){
+/* 4 */ void Delete_Head(Node *&head, Node *&tail){
     //* Time_Complexity --> O(1)
 
     if(head == NULL){
@@ -272,6 +272,11 @@ int main(){
 
     Node *DeleteNode = head;
     head = head->next;
+
+    if(head == NULL){
+        tail = NULL;
+        return;
+    }
     head->previous = NULL;
 
     delete DeleteNode;
@@ -304,7 +309,7 @@ int main(){
 
 //_______________________________________________________________________________________________
 
-/* 6 */ void Delete_tail(Node *&tail){
+/* 6 */ void Delete_tail(Node *&head, Node *&tail){
     //* Time_Complexity --> O(1)
 
     Node *DeleteNode = NULL;
@@ -316,7 +321,13 @@ int main(){
 
     DeleteNode = tail;
     tail = tail->previous;
-    tail->next->next == NULL;
+
+    if(tail == NULL){
+        head = NULL;
+        return;
+    }
+
+    tail->next = NULL;
 
     delete DeleteNode;
 }
