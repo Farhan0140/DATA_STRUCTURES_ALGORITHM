@@ -36,6 +36,7 @@ class Node{
 /* 11 */ void reverse_R(Node *&head, Node *tmp);  // Using Recursion
 /* 11 */ void reverse_L(Node *&head);  // Using Loop
 /* 12 */ void Demo_linked_list(Node * &head, Node *&tail, int size);
+/* 13 */ void Detect_Cycle_in_Singly_Linked_List(Node *head);
 /* 0 */ void Print(Node *head);
 
 //!_______________________________________________________________________________________________
@@ -59,6 +60,7 @@ int main(){
         cout << "10. Sort in Descending Order" << endl;
         cout << "11. Reverse" << endl;
         cout << "12. Demo Linked List" << endl;
+        cout << "13. Detect Cycle in Singly Linked List" << endl;
         cout << "0. Print Linked List\n\n--> ";
 
         int choose; cin >> choose;
@@ -170,6 +172,11 @@ int main(){
                 cout << "Enter Demo Linked list Size -> "; cin >> sz;
                 Demo_linked_list(head, tail, sz);
                 Print(head);
+            break;
+
+            case 13:
+                system("cls");
+                Detect_Cycle_in_Singly_Linked_List(head);
                 break;
 
             case 0:
@@ -427,7 +434,7 @@ int main(){
 
 //_______________________________________________________________________________________________
 
-/* 1c2 */void Demo_linked_list(Node *&head, Node *&tail, int size){
+/* 12 */void Demo_linked_list(Node *&head, Node *&tail, int size){
     //* Time_Complexity --> O(N)
 
     Node *temp = head;
@@ -445,6 +452,28 @@ int main(){
             temp = temp->next;
         }
     }
+}
+
+//!________Hare and Tortoise___OR___Fast and Slow________________________________________________
+
+/* 13 */ void Detect_Cycle_in_Singly_Linked_List(Node *head){
+    Node *hare = head;
+    Node *tortoise = head;
+
+    bool bl = false;
+
+    while(hare != NULL && hare->next != NULL){
+        hare = hare->next->next;
+        tortoise = tortoise->next;
+
+        if(hare == tortoise){
+            bl = true;
+            break;
+        }
+    }
+
+    if(bl){ cout << "Cycle Detected\n" << endl; }
+    else{ cout << "Cycle Not Detected\n" << endl; }
 }
 
 //_______________________________________________________________________________________________

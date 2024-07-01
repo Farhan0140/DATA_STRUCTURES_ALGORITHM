@@ -25,19 +25,20 @@ class Node{
 
 //!_______________________________________________________________________________________________
 
-/* 1 */ void Insert_at_head(Node * &head, Node *&tail, int val); //done
-/* 2 */ void Insert_at_anyPosition(Node *head, int pos, int val); // DONE
-/* 3 */ void Insert_at_tail(Node * &head, Node *&tail, int val); // done
-/* 4 */ void Delete_Head(Node * &head, Node *&tail); //done
+/* 1 */ void Insert_at_head(Node * &head, Node *&tail, int val);
+/* 2 */ void Insert_at_anyPosition(Node *head, int pos, int val); 
+/* 3 */ void Insert_at_tail(Node * &head, Node *&tail, int val); 
+/* 4 */ void Delete_Head(Node * &head, Node *&tail);
 /* 5 */ void Delete_any_position(Node *head, int pos);
 /* 6 */ void Delete_tail(Node *&head, Node *&tail);
 /* 7 */ void Take_a_Linked_List_as_Input(Node *&head, Node *&tail);
-/* 8 */ int Size_of_a_Linked_List(Node *head); // done
+/* 8 */ int Size_of_a_Linked_List(Node *head); 
 /* 9 */ void Sort_A(Node *head);
 /* 10 */ void Sort_D(Node *head);
-/* 11 */ void Demo_linked_list(Node * &head, Node *&tail, int size); // done
-/* 0 */ void Print_head_to_tail(Node *head); // done
-/* 0 */ void Print_tail_to_head(Node *tail); // done
+/* 11 */ void Demo_linked_list(Node * &head, Node *&tail, int size); 
+/* 12 */ void Reverse(Node *head, Node *tail); // Using Two pointer Technique
+/* 0 */ void Print_head_to_tail(Node *head); 
+/* 0 */ void Print_tail_to_head(Node *tail); 
 
 //!_______________________________________________________________________________________________
 
@@ -59,6 +60,7 @@ int main(){
         cout << "9. Sort in Ascending Order" << endl;
         cout << "10. Sort in Descending Order" << endl;
         cout << "11. Demo Linked List" << endl;
+        cout << "12. Reverse Linked List Using Two pointer" << endl;
         cout << "0. Print Linked List\n\n--> ";
 
         int choose; cin >> choose;
@@ -159,7 +161,13 @@ int main(){
                 cout << "Enter Demo Linked list Size -> "; cin >> sz;
                 Demo_linked_list(head, tail, sz);
                 Print_head_to_tail(head);
-                break;
+            break;
+
+            case 12:
+                system("cls");
+                Reverse(head, tail);
+                Print_head_to_tail(head);
+            break;
 
             case 0:
                 system("cls");
@@ -418,6 +426,21 @@ int main(){
             temp = temp->next;
         }
     }
+}
+
+//_______________________________________________________________________________________________
+
+/* 12 */ void Reverse(Node *head, Node *tail){
+    Node *i = head;
+    Node *j = tail;
+
+    while(i != j && i->next != j){
+        swap(i->data, j->data);
+        i = i->next;
+        j = j->previous;
+    }
+
+    swap(i->data, j->data);   // Jokhon node sonkha even thakbe,, tokhon i->next != j er jonno loop break hoe jabe tai baire ekbar swap korci,, ete kono problem nai
 }
 
 //_______________________________________________________________________________________________
