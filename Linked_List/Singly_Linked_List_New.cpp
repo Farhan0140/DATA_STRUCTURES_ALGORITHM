@@ -41,6 +41,10 @@ class Node{
 
 //!_______________________________________________________________________________________________
 
+int Size = 0; // O(1)
+
+//!_______________________________________________________________________________________________
+
 
 int main(){
 
@@ -135,7 +139,8 @@ int main(){
 
             case 8:
                 system("cls");
-                Size_of_a_Linked_List(head);
+                // Size_of_a_Linked_List(head); // O(N)
+                cout << Size << endl; // O(1)
                 Print(head);
             break;
 
@@ -198,6 +203,7 @@ int main(){
 /* 1 */void Insert_at_head(Node * &head, int val){
     //* Time_Complexity --> O(1)
 
+    Size++;
     Node *newNode = new Node(val);
 
     newNode->next = head;
@@ -209,7 +215,7 @@ int main(){
 /* 2 */void Insert_at_anyPosition(Node *head, int pos, int val){
     //! Method 1:
     //* Time_Complexity --> O(N)
-
+    Size++;
     Node *newNode = new Node(val);
     Node *temp = head;
 
@@ -245,6 +251,7 @@ int main(){
 //_______________________________________________________________________________________________
 
 /* 3 */void Insert_at_tail(Node *&head, Node *&tail, int val){
+    Size++;
     //! Method 1:
     //* Time_Complexity --> O(N)
 
@@ -276,6 +283,7 @@ int main(){
 //_______________________________________________________________________________________________
 
 /* 4 */ void Delete_Head(Node * &head){
+    Size--;
     //* Time_Complexity --> O(1)
 
     if(head == NULL){
@@ -292,6 +300,7 @@ int main(){
 //_______________________________________________________________________________________________
 
 /* 5 */ void Delete_any_position(Node *head, int pos){
+    Size--;
     //* Time_Complexity --> O(N)
 
     Node *temp = head;
@@ -317,6 +326,7 @@ int main(){
 //_______________________________________________________________________________________________
 
 /* 6 */ void Delete_tail(Node *&head){
+    Size--;
     //* Time_Complexity --> O(N)
 
     Node *DeleteNode;
@@ -342,6 +352,7 @@ int main(){
 
 /* 7 */ void Take_a_Linked_List_as_Input(Node *&head, Node *&tail){
     while(true){
+        Size++;
         int val; cin >> val;
         if(val == -1){ break; }
         
@@ -440,6 +451,7 @@ int main(){
     Node *temp = head;
 
     for(int i=1; i<=size; i++){
+        Size++;
         Node *newNode = new Node(i);
 
         if(head == NULL){

@@ -354,6 +354,7 @@ int main(){
             tail = newNode;
         }else{
             tail->next = newNode;
+            newNode->previous = tail;
             tail = newNode;
         }
     }
