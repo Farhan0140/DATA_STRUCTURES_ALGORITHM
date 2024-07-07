@@ -5,59 +5,79 @@ using namespace std;
 
 class Node{
     public:
-    int data;
-    Node *next;
+      int data;
+      Node *next;
+
+    Node(int value){
+        data = value;
+        next = NULL;
+    }
 };
 
-Node *head = NULL;
-Node *tail = NULL;
+//_______________________________________________________________________________________________
 
-void Enqueue(int value){
-    Node *new_node = (Node *)malloc(sizeof(Node));
-    new_node->data = value;
-    new_node->next = NULL;
-    if(head==NULL && tail==NULL){
-        head = new_node;
-        tail = new_node;
-    } else {
-        tail->next = new_node;
-        tail = new_node;
+class Queue{
+    public:
+      Node *head = NULL;
+      Node *tail = NULL;
+      int size = 0;
+
+    void Push(int val) {
+        size++;
+        Node *newNode = new Node(val);
+
+        if(head == NULL){
+            head = newNode;
+            tail = newNode;
+        }else{
+            tail->next = newNode;
+            tail = newNode;
+        }
     }
-}
 
-void Dequeue(){
-    Node *temp = head;
+    void Pop() {
+        size--;
+        Node *del = head;
+        head = head->next;
+        delete del;
 
-    head = head->next;
-}
-
-void Print(){
-    Node *current = head;
-
-    while(current != NULL){
-        cout << current->data << " ";
-        current = current->next;
+        if(head == NULL){
+            tail = NULL;
+        }
     }
-    cout << endl;
-}
+
+    int Front() {
+        return head->data;
+    }
+
+    int Size() {
+        return size;
+    }
+
+    bool Empty() {
+        if(size == 0) { return true; }
+        else { return false; }
+    }
+};
+
 
 //_______________________________________________________________________________________________
 
 
-int main(){
-    cout << "After Enqueue some value: ";
-    Enqueue(12);
-    Enqueue(90);
-    Enqueue(67);
-    Enqueue(100);
-    Enqueue(99);
-    Enqueue(1000);
-    Print();
+int main() {
+    Queue q;
+    int n;
+    cout << "Enter the Size of Queue --> "; cin >> n;
 
-    Dequeue();
-    Dequeue();
-    Dequeue();
-    Print();
+    while(n--){
+        int x; cin >> x;
+        q.Push(x);
+    }
+
+    while(!q.Empty()) {
+        cout << q.Front() << " ";
+        q.Pop();
+    }
     return 0;
 }
 

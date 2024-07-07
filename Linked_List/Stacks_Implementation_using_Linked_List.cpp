@@ -5,65 +5,82 @@ using namespace std;
 
 class Node{
     public:
-    int data;
-    Node *next;
+      Node *previous;
+      int data;
+      Node *next;
+
+    Node(int value){
+        previous = NULL;
+        data = value;
+        next = NULL;
+    }
 };
 
-Node *top = NULL;
+//_______________________________________________________________________________________________
+
+class Stack {
+    public:
+      Node *head = NULL;
+      Node *tail = NULL;
+      int size = 0;
+
+    void Push(int val) {
+        size++;
+        Node *newNode = new Node(val);
+
+        if(head == NULL){
+            head = newNode;
+            tail = newNode;
+        }else{
+            tail->next = newNode;
+            newNode->previous = tail;
+            tail = newNode;
+        }
+    }
+
+    void Pop() {
+        size--;
+        Node *del = tail;
+        tail = tail->previous;
+        delete del;
+
+        if(tail == NULL){
+            head = NULL;
+        }
+    }
+
+    int Top() {
+        return tail->data;
+    }
+
+    int Size() {
+        return size;
+    }
+
+    bool Empty() {
+        if(size == 0) { return true; }
+        else { return false; }
+    }
+};
+
 
 //_______________________________________________________________________________________________
 
-void Push(int value){
-    Node *new_node = (Node *)malloc( sizeof(Node));
 
-    if(new_node == NULL){ cout << "Stack Overflow...." << endl; exit(1); }
+int main() {
+    Stack st;
+    int n;
+    cout << "Enter the Size of Stack --> "; cin >> n;
 
-    new_node->data = value;
-
-    if(top == NULL){ 
-        top = new_node; 
-        new_node->next = NULL;
-    } else { 
-        new_node->next = top;
-        top = new_node;
-    }
-}
-
-
-void Pop(){
-    Node *temp = top;
-
-    if(temp == NULL){
-        cout << "Stack is empty!" << endl;
-        exit(1);
+    while(n--){
+        int x; cin >> x;
+        st.Push(x);
     }
 
-    top = top->next;
-}
-
-
-void Print(){
-    Node *temp_top = top;
-
-    while(temp_top != NULL){
-        cout << temp_top->data << " ";
-        temp_top = temp_top->next;
+    while(!st.Empty()) {
+        cout << st.Top() << " ";
+        st.Pop();
     }
-    cout << endl;
-}
-
-//_______________________________________________________________________________________________
-
-
-int main(){
-    Push(12);
-    Push(9);
-    Push(99);
-    Print();
-    Pop();
-    Pop();
-    Pop();
-    Print();
     return 0;
 }
 
