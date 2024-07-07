@@ -64,11 +64,11 @@ Node_1 *create_tree_1();
 
 //____________________Tree_Traversal_____________________________________________________________
 
-/* Pre_Order */ void pre_order(Node *root);
+/* Pre_Order */ void pre_order(Node *root);      // Root -> Left -> Right
                 void pre_order_1(Node_1 *root1);
-/* Post_Order */ void post_order(Node *root);
+/* Post_Order */ void post_order(Node *root);    // Left -> Right -> Root
                  void post_order_1(Node *root);
-/* In_Order */ void in_order(Node *root);
+/* In_Order */ void in_order(Node *root);        // Left -> Root -> Right
                void in_order_1(Node *root);
 
 //_______________________________________________________________________________________________
