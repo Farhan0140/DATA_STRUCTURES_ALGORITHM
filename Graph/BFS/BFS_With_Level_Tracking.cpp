@@ -13,6 +13,7 @@ using namespace std;
 const ll S = 1e5;
 vector<ll> Arr[S];
 bool visited[S];
+ll level[S];
 
 void BFS(ll src);
 
@@ -30,9 +31,14 @@ int main(){
     }
 
     memset(visited, false, sizeof(visited));
+    memset(level, -1, sizeof(level));
 
     ll src; cin >> src;
     BFS(src);
+
+    for(ll i=0; i<n; i++) {
+        cout << i << " -> " << level[i] << endl;
+    }
     return 0;
 }
  
@@ -44,6 +50,7 @@ void BFS(ll src){
 
     q.push(src);
     visited[src] = true;
+    level[src] = 0;
 
     while(!q.empty()) {
         ll parent = q.front(); q.pop();
@@ -54,9 +61,12 @@ void BFS(ll src){
             if(!visited[child]) {
                 visited[child] = true;
                 q.push(child);
+                level[child] = level[parent] + 1;
             }
         }
     }
+
+    cout << endl;
 }
 
 //_______________________________________________________________________________________________

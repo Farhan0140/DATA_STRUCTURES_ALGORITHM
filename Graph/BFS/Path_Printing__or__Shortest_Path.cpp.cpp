@@ -13,6 +13,7 @@ using namespace std;
 const ll S = 1e5;
 vector<ll> Arr[S];
 bool visited[S];
+ll Parent[S];
 
 void BFS(ll src);
 
@@ -30,9 +31,23 @@ int main(){
     }
 
     memset(visited, false, sizeof(visited));
+    memset(Parent, -1, sizeof(Parent));
 
-    ll src; cin >> src;
+    ll src, dis; cin >> src >> dis;
     BFS(src);
+
+    vector<ll> Shortest_Path;
+    while(dis != -1) {
+        // cout << dis << " ";
+        Shortest_Path.push_back(dis);
+        dis = Parent[dis];
+    }
+
+    reverse(all(Shortest_Path));
+
+    for(auto it: Shortest_Path) {
+        cout << it << " ";
+    }
     return 0;
 }
  
@@ -48,11 +63,10 @@ void BFS(ll src){
     while(!q.empty()) {
         ll parent = q.front(); q.pop();
 
-        cout << parent << " ";
-
         for(ll child : Arr[parent]) {
             if(!visited[child]) {
                 visited[child] = true;
+                Parent[child] = parent;
                 q.push(child);
             }
         }

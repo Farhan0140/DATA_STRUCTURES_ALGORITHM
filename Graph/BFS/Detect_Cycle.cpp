@@ -13,6 +13,8 @@ using namespace std;
 const ll S = 1e5;
 vector<ll> Arr[S];
 bool visited[S];
+ll Parent[S];
+bool is_cycle = false;
 
 void BFS(ll src);
 
@@ -30,9 +32,16 @@ int main(){
     }
 
     memset(visited, false, sizeof(visited));
+    memset(Parent, -1, sizeof(Parent));
 
     ll src; cin >> src;
     BFS(src);
+
+    if(is_cycle) {
+        cout << "Cycle Detected" << endl;
+    } else {
+        cout << "No Cycle" << endl;
+    }
     return 0;
 }
  
@@ -48,12 +57,15 @@ void BFS(ll src){
     while(!q.empty()) {
         ll parent = q.front(); q.pop();
 
-        cout << parent << " ";
-
         for(ll child : Arr[parent]) {
+            if(visited[child] && child != Parent[parent]) {
+                is_cycle = true;
+            }
+
             if(!visited[child]) {
                 visited[child] = true;
                 q.push(child);
+                Parent[child] = parent;
             }
         }
     }

@@ -14,7 +14,7 @@ const ll S = 1e5;
 vector<ll> Arr[S];
 bool visited[S];
 
-void BFS(ll src);
+void BFS(ll src, ll dis);
 
 //_______________________________________________________________________________________________
  
@@ -31,31 +31,41 @@ int main(){
 
     memset(visited, false, sizeof(visited));
 
-    ll src; cin >> src;
-    BFS(src);
+    ll src, dis; cin >> src >> dis;
+    BFS(src, dis);
     return 0;
 }
  
  
 //_______________________________________________________________________________________________
 
-void BFS(ll src){
-    queue<ll> q;
+void BFS(ll src, ll dis){
+    queue<pair<ll, ll>> q; // Source, Level
 
-    q.push(src);
+    q.push({src, 0});
     visited[src] = true;
+    bool is_connected = false;
 
     while(!q.empty()) {
-        ll parent = q.front(); q.pop();
+        pair<ll, ll> parent = q.front(); q.pop();
 
-        cout << parent << " ";
+        // cout << parent.first << " --> " << parent.second << endl;
+        if(parent.first == dis) {
+            is_connected = true;
+        }
 
-        for(ll child : Arr[parent]) {
+        for(ll child : Arr[parent.first]) {
             if(!visited[child]) {
                 visited[child] = true;
-                q.push(child);
+                q.push({child, parent.second});
             }
         }
+    }
+
+    if(!is_connected) {
+        cout << "Not Connected" << endl;
+    } else {
+        cout << "Connected" << endl;
     }
 }
 
