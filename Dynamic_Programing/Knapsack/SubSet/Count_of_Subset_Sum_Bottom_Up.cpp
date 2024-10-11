@@ -11,6 +11,8 @@ using namespace std;
 6
 0 0 0 0 0 7
 7
+
+//-----> 16
 */
 
 #define ll long long int
