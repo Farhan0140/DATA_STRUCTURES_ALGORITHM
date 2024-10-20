@@ -3,6 +3,10 @@ using namespace std;
  
 //_______________________________________________________________________________________________
 
+/*
+12
+2 3 15 16 17 1 4 6 8 9 5 10
+*/
 #define ll long long int
 #define IOS (ios_base :: sync_with_stdio(false), cin.tie(NULL));
 
