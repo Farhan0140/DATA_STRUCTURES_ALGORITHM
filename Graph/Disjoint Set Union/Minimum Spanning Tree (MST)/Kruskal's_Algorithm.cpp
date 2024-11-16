@@ -50,6 +50,7 @@ int main(){
     sort(all(edges), Cmp);
 
     ll Total_Cost = 0;
+    
     for(Edge_List edg: edges) {
         ll Leader_U = Find_Leader(edg.u);
         ll Leader_V = Find_Leader(edg.v);
