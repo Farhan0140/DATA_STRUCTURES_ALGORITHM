@@ -27,9 +27,9 @@ int main(){
     int DP[n+5][coin+5];
 
     for(int i=0; i<=coin; i++) {
-        DP[0][i] = INT_MAX-1;
+        DP[0][i] = INT_MAX - 1;
     }
-    DP[0][0] = 1;
+    DP[0][0] = 0;
 
     for(int i=1; i<=n; i++) {
         for(int j=0; j<=coin; j++) {
